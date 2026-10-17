@@ -118,11 +118,11 @@ text=function(value,...args){
 const flipPlayerImage=new Image();
 flipPlayerImage.src='images/stickman.png';
 flipPlayerImage.addEventListener('load',()=>{if(current==='flip')draw();});
+const flipBackgroundImage=new Image();
+flipBackgroundImage.src='images/constructionsitebackground.png';
+flipBackgroundImage.addEventListener('load',()=>{if(current==='flip')draw();});
 drawFlip=function(){
-  ctx.fillStyle='#29483b';ctx.fillRect(0,0,800,500);
-  ctx.fillStyle='#396d4a';ctx.fillRect(14,14,772,472);
-  ctx.fillStyle='#d4f455';ctx.fillRect(18,410,764,36);
-  ctx.fillStyle='#ff715b';ctx.fillRect(18,446,764,40);
+  if(flipBackgroundImage.complete&&flipBackgroundImage.naturalWidth){const scale=Math.max(800/flipBackgroundImage.naturalWidth,500/flipBackgroundImage.naturalHeight),width=flipBackgroundImage.naturalWidth*scale,height=flipBackgroundImage.naturalHeight*scale;ctx.drawImage(flipBackgroundImage,(800-width)/2,(500-height)/2,width,height);}else{ctx.fillStyle='#29483b';ctx.fillRect(0,0,800,500);}
   ctx.strokeStyle='#17201d';ctx.lineWidth=2;ctx.beginPath();
   ctx.moveTo(280,300);ctx.lineTo(306,300);ctx.lineTo(306,430);ctx.moveTo(276,350);ctx.lineTo(310,350);
   ctx.moveTo(395,350);ctx.lineTo(495,350);ctx.moveTo(395,370);ctx.lineTo(495,370);
