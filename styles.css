@@ -2,3 +2,4 @@
 /* Desktop arcade layout: five columns, two rows of slots. */
 @media(min-width:1051px){.game-grid{grid-template-columns:repeat(5,1fr)}.game-card{min-height:500px}.card-illustration{height:210px}.card-info{display:block}.card-desc{margin-top:14px;max-width:180px}.card-info h3{font-size:32px}}
 .button-restart{background:transparent;color:var(--ink);border:1px solid var(--ink);padding:12px;width:100%;justify-content:space-between;margin-top:9px}.button-restart:hover{background:var(--ink);color:var(--paper)}
+:root{--sans:'Manrope',sans-serif;--display:'Pixelify Sans',sans-serif;--body:'Manrope',sans-serif}body{font-family:var(--body)}.hero h1,.section-heading h2,.manifesto h2,.game-intro h2,.card-info h3{font-family:var(--display);font-weight:600}.hero h1 em,.section-heading h2 em,.manifesto h2 em{font-family:var(--display);font-style:normal;font-weight:500}
