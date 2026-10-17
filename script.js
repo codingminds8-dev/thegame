@@ -114,3 +114,25 @@ text=function(value,...args){
   message=message.replace('THE LONG WAY DOWN','The jumper is taking the long way down.').replace('CONSTRUCTION SITE / LEVEL 01','This is level 1 at the construction site.').replace('LAND INSIDE THE RING','Land inside the ring.').replace('DRAG TO LAUNCH — ONE FLIP TO CLEAR','Click and drag to launch the jumper over the obstacles.').replace('STUCK THE LANDING.','The jumper landed safely.').replace('WIPEOUT.','The jumper did not reach the ring.').replace('THE CROWD GOES WILD','The landing was successful.').replace('CLEAR THE OBSTACLES AND TRY AGAIN','Clear the obstacles and try again.').replace('DRAG UP AND RIGHT TO FLIP','Click and drag upward and to the right to launch the jumper.');
   return originalCanvasText(message,...args);
 };
+
+const flipPlayerImage=new Image();
+flipPlayerImage.src='images/stickman.png';
+flipPlayerImage.addEventListener('load',()=>{if(current==='flip')draw();});
+drawFlip=function(){
+  ctx.fillStyle='#29483b';ctx.fillRect(0,0,800,500);
+  ctx.fillStyle='#396d4a';ctx.fillRect(14,14,772,472);
+  ctx.fillStyle='#d4f455';ctx.fillRect(18,410,764,36);
+  ctx.fillStyle='#ff715b';ctx.fillRect(18,446,764,40);
+  ctx.strokeStyle='#17201d';ctx.lineWidth=2;ctx.beginPath();
+  ctx.moveTo(280,300);ctx.lineTo(306,300);ctx.lineTo(306,430);ctx.moveTo(276,350);ctx.lineTo(310,350);
+  ctx.moveTo(395,350);ctx.lineTo(495,350);ctx.moveTo(395,370);ctx.lineTo(495,370);
+  ctx.moveTo(555,260);ctx.lineTo(581,260);ctx.lineTo(581,430);ctx.moveTo(550,310);ctx.lineTo(586,310);ctx.stroke();
+  ctx.fillStyle='#f3f0e8';ctx.beginPath();ctx.arc(flip.target.x,flip.target.y,flip.target.r,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#17201d';ctx.beginPath();ctx.arc(flip.target.x,flip.target.y,flip.target.r-12,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ff715b';ctx.lineWidth=5;ctx.beginPath();ctx.arc(flip.target.x,flip.target.y,flip.target.r-7,0,Math.PI*2);ctx.stroke();
+  if(flipPlayerImage.complete&&flipPlayerImage.naturalWidth){ctx.save();ctx.translate(flip.x,flip.y);ctx.rotate(flip.angle);ctx.drawImage(flipPlayerImage,-31,-59,62,93);ctx.restore();}
+  text('This is level 1 at the construction site.',28,42,12,'#f3f0e8');
+  text(flip.started?'Land inside the ring.':'Click and drag to launch the jumper over the obstacles.',28,475,12,'#f3f0e8');
+  if(!flip.started&&mouse.down){ctx.strokeStyle='#ff715b';ctx.setLineDash([5,5]);ctx.beginPath();ctx.moveTo(flip.x,flip.y);ctx.lineTo(mouse.x,mouse.y);ctx.stroke();ctx.setLineDash([])}
+  if(flip.landed||flip.miss){ctx.fillStyle='rgba(23,32,29,.84)';ctx.fillRect(175,175,450,130);text(flip.landed?'The jumper landed safely.':'The jumper did not reach the ring.',400,225,24,flip.landed?'#d4f455':'#ff715b','center');text(flip.landed?'The landing was successful.':'Clear the obstacles and try again.',400,260,12,'#f3f0e8','center');}
+};
